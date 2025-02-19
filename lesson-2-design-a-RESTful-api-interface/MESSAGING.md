@@ -45,9 +45,9 @@ Research how GraphQL is used for message passing and compare your findings again
 - Compare and contrast tradeoffs between GraphQL and REST
 - Compare and contrast tradeoff between GrapphQL and gRPC
 
-GraphQL has his advantages in beeing able to apply queries on the internal data structures. This new API is flexible regarding adaption and extending the queries by handling fields and methods (functions) over a simple syntax based on json. 
+GraphQL has his advantages in beeing able to apply queries on the internal data structures. This new API is flexible regarding adaption and extending the queries by handling fields and methods (functions) over a simple syntax based on json.
 
-#### Compared to REST: 
+#### Compared to REST:
 
 '+ Does not depend on the http protocols and its methods'\
 '- When used on external communication, security and dependend on counterpart implementation'
@@ -115,3 +115,33 @@ How might GraphQL be useful in an application that you have worked on before in 
 
 #### My Answer:
 Thinking of a solution for a more perfomant alert and case management in fraud dectection applications it would make sense to evaluate GraphQL as interface for quering data with less overhead compared to database client server queries fetching too much data at once.
+
+### Updating Orders Service:
+
+#### Question:
+List five tasks that will be needed in REST, gRPC, and Kafka message and implementation to make modifications to our existing computer orders schema to include a type field
+
+#### Answer:
+- REST: rework request and response order message to include a new (below details: computer_type)
+- gRPC: rework message and add a new enum for computer_type
+- gRPC: rework message and remove Desktop for enum equipement
+- gRPC: Recreate the protobuf binary
+- Kafka: Extend the method create_order and retrieve_order to support a field computer_type
+
+#### Solution:
+The following five items are tasks that I will present to my team:
+
+- REST message interface
+- gRPC protobuf message
+- Flask code to handle new field
+- gRPC server code to handle new field
+- Update Kafka consumers to expect the new field
+
+Note that there are different solutions to this exercise and that your solution may not look exactly like mine.
+
+### Reflection on Solution: [Final Exercise]
+#### Question:
+Why is it useful to present a list like this when you propose changes for your team to work on?
+
+- It helps to boil down the tasks to single work items as features, story, etc.
+- It is base for a discussion on task adopting from given input on a review.
