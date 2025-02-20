@@ -145,3 +145,56 @@ Why is it useful to present a list like this when you propose changes for your t
 
 - It helps to boil down the tasks to single work items as features, story, etc.
 - It is base for a discussion on task adopting from given input on a review.
+
+### Thinking Like a Cloud Native Developer
+
+#### Question:
+How was your experience with integrating a Flask REST API with a Kafka queue? How might integrating a REST API with a Kafka queue be useful in large production systems?
+
+#### Answer:
+- For getting it done I did use quite a lot of time. The diffculties arised about the lack of experience wirking with http REST request an dtesting it by using postman.
+- Integrating it in large production environments will add relilabilty to the communication, as the message will get persisted in a queue before being processed by an http webserver. It's actually a safety measure to prevent a timeout base on overload or service interrupiton based on the backend failure.
+
+### Applying OpenAPI
+Create an OpenAPI specification for our computer orders REST API. We want to make sure that users of the API know how to set up their integrations to retrieve all orders and create a new order.
+
+#### Approach:
+Use the Swagger Editor to generate and test the API documentation: https://editor.swagger.io/
+
+### Thinking Like a Cloud Native Developer (OpenAPI 1)
+
+#### Question:
+How might you find OpenAPI useful in your RESTful API implementations? When would it not make sense to use OpenAPI?
+
+#### Answer:
+- OpenAPI is usefull to support API extensions and changes for deveolopers and cnnecting partners.
+- It helps to support several versions of API defintitions operated in parallel.
+
+### Thinking Like a Cloud Native Developer (openAPI 2)
+
+#### Question:
+Once the new endpoints are set, what other parts of the code will we need to modify?
+
+#### Answer:
+- We could modify the logic inside the new v2 API
+- We could change the data structure of our v2 API
+- We should rework our shared codebase to support both versions of our API (for example in services.py)
+
+### Thinking Like a Cloud Native Developer (Messaging techniques, API's)
+
+#### Question:
+Choose at least two of the strategies discussed in this lesson and describe how using those strategies would have helped you on an earlier project.
+
+#### Answer:
+- Combination of techniques: For our card payment fraud detection application we did rely too much only on common REST APIs for internal and external communication.
+We could have done a better job, if we would have used REST for the low traffic and confirm it by a callback, gRPC for our high traffic real-time and Kafka for our near real-time high traffic interfaces
+- Future proofing our message passing: Our software provider did often introduce based on new feature requests extension of existing API's or introduce new API's. Mostly all updates were delivered were not working due to bad architecture specification or developer implementation. A very good example of missing appropriate API documentation or skipping any API unit testing at developer’s side.
+
+### Thinking Like a Cloud Native Developer (Bad use cases)
+
+#### Question:
+We discussed situations in which these strategies can be useful. Can you think of situations when these strategies would not be useful and would add unnecessary complexity to your projects?
+
+##### Answer:
+- A bad use case would be to introduce a complex additional operating infrastructure as Kafka in a company, where no resposible team can be found to operate it reliable. Evaluate alternative options as RabbitMQ Streaming for a suited use case.
+- Another suboptimal use case would be to introduce gRPC for communication over API's to external applications, where you have no control on development standards and security infrastructure. Using an API Gateway as Kong could fill the gap by adding more security and decoupling company diversity risks.

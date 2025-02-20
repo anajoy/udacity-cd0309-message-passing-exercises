@@ -2,7 +2,7 @@
 client/build
 
 # Ignore pycache
-api/__pycache__
+*__pycache__*
 
 # Ignore auxillary files
 .idea

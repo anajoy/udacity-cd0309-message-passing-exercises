@@ -14,7 +14,7 @@ def create_order(order_data):
     # TODO: send the data using kafka_producer using .send()
     kafka_data = json.dumps(order_data).encode()
     kafka_producer = g.kafka_producer
-    kafka_producer.send("items", kafka_data)
+    kafka_producer.send("computers", kafka_data)
 
 
 def retrieve_orders():
